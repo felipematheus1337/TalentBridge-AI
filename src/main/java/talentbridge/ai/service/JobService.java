@@ -9,18 +9,21 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class JobService {
+public class JobService implements IJobService {
 
     private final JobRepository jobRepository;
 
+    @Override
     public Job create(Job job) {
         return jobRepository.save(job);
     }
 
+    @Override
     public List<Job> listAll() {
         return jobRepository.findAll();
     }
 
+    @Override
     public Job getById(String id) {
         return jobRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Job not found with id: " + id));

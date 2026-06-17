@@ -1,11 +1,11 @@
 package talentbridge.ai.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import talentbridge.ai.dto.JobCandidateRequest;
+import talentbridge.ai.dto.JobDetails;
 import talentbridge.ai.facade.LLMFacade;
+import talentbridge.ai.utils.LLMUtils;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,9 +15,13 @@ public class HumanResourcesController {
     private final LLMFacade facade;
 
     @PostMapping("/generate-resume")
-    public String generateResume(@RequestParam("candidateId") String id,
-                                 @RequestParam("jobId") String jobId) {
-        return facade.toGenerateResume(id, jobId);
+    public String generateResume(@RequestBody JobCandidateRequest request) {
+        return facade.execute(request.getIdCandidate(), request.getIdJob(), LLMUtils.RESUME_EVENT);
+    }
+
+    @PostMapping("/fitting")
+    public JobDetails generateFitting(@RequestBody JobCandidateRequest request) {
+        return facade.execute(request.getIdCandidate(), request.getIdJob(), LLMUtils.FITTING_EVENT);
     }
 
 

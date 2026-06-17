@@ -2,5 +2,5 @@ package talentbridge.ai.strategies;
 
 public interface TalentStrategy<T> {
 
-    T execute(Object... args);
+    T execute(String candidateId, String jobId);
 }

@@ -9,18 +9,21 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CandidateService {
+public class CandidateService implements ICandidateService {
 
     private final CandidateRepository candidateRepository;
 
+    @Override
     public Candidate create(Candidate candidate) {
         return candidateRepository.save(candidate);
     }
 
+    @Override
     public List<Candidate> listAll() {
         return candidateRepository.findAll();
     }
 
+    @Override
     public Candidate getById(String id) {
         return candidateRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Candidate not found with id: " + id));
