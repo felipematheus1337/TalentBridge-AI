@@ -1,0 +1,8 @@
+UserResume:
+{userResume}
+
+
+JobDescription:
+{jobDescription}
+
+Analyze and then create the best resume possible for the user based on the provided resume and job description.
