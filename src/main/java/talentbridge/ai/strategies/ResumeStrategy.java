@@ -2,6 +2,7 @@ package talentbridge.ai.strategies;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import talentbridge.ai.llm.LLMOpenAIClient;
 import talentbridge.ai.service.ICandidateService;
 import talentbridge.ai.service.IJobService;
 
@@ -11,13 +12,12 @@ public class ResumeStrategy implements TalentStrategy<String> {
 
     private final ICandidateService candidateService;
     private final IJobService jobService;
+    private final LLMOpenAIClient llmOpenAIClient;
 
     @Override
     public String execute(String candidateId, String jobId) {
-
         var candidate = candidateService.getById(candidateId);
         var job = jobService.getById(jobId);
-
-        return "mocked-resume";
+        return llmOpenAIClient.generateResume(candidate.getResume(), job.getDescription());
     }
 }

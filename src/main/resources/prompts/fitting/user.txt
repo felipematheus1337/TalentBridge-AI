@@ -1,0 +1,8 @@
+UserResume:
+{userResume}
+
+
+JobDescription:
+{jobDescription}
+
+Evaluate the candidate fit and return the result as JSON.
